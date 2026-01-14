@@ -1,189 +1,306 @@
-<?php
-// One-page slider portfolio using provided content
-?>
+<?php ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ace Cauilan | Developer Portfolio</title>
+<meta charset="UTF-8">
+<title>Mary Grace Cauilan | Web Developer & Data Analyst</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0f172a;
-      color: #e5e7eb;
-      overflow: hidden;
-    }
-    .slider {
-      display: flex;
-      width: 800vw;
-      transition: transform .6s ease;
-    }
-    .slide {
-      width: 100vw;
-      min-height: 100vh;
-      padding: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .card {
-      max-width: 900px;
-      width: 100%;
-      background: #020617;
-      border-radius: 18px;
-      border: none;
-      padding: 3rem;
-      box-shadow: 0 20px 50px rgba(0,0,0,.45);
-    }
-    h1,h2,h3 { color: #f8fafc; }
-    .muted { color: #94a3b8; }
-    .nav-btn {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 10;
-    }
-    .nav-btn button { margin-left: .5rem; }
-    ul { padding-left: 1.1rem; }
-    li { margin-bottom: .4rem; }
-  </style>
+<!-- Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0b0f1a;
+  --surface: #12182a;
+  --text: #e6e8ef;
+  --muted: #9aa4bf;
+  --accent: #5eead4;
+  --accent2: #38bdf8;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #0b0f1a, #12182a);
+  color: var(--text);
+ 
+/* NAVBAR */
+.navbar {
+  background: rgba(11,15,26,.85);
+  backdrop-filter: blur(12px);
+}
+.nav-link {
+  color: var(--muted);
+  font-weight: 500;
+}
+.nav-link:hover {
+  color: var(--accent);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.hero h1 {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 900;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero p {
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+.btn-main {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border: none;
+  color: #020617;
+  padding: 14px 32px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn-main:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(94,234,212,.35);
+}
+/* CARDS */
+.card-ui {
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 22px;
+  padding: 2rem;
+  height: 100%;
+  transition: transform .25s ease, border .25s ease;
+}
+.card-ui:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+}
+.card-ui h5 {
+  font-weight: 700;
+}
+
+/* SKILLS */
+.skill-badge {
+  display: inline-block;
+  background: rgba(94,234,212,.12);
+  color: var(--accent);
+  padding: 8px 16px;
+  border-radius: 999px;
+  margin: 6px;
+  font-size: 0.9rem;
+}
+
+/* CONTACT */
+#contact {
+  background: var(--surface);
+  padding: 80px 0;
+  border-radius: 20px;
+}
+.contact-form input, .contact-form textarea {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  color: var(--text);
+}
+.contact-form input:focus, .contact-form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: none;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  margin-top: 40px;
+  color: var(--muted);
+}
+
+section { scroll-margin-top: 80px; }
+
+</style>
 </head>
+
 <body>
 
-<div id="slider" class="slider">
-
-  <!-- Intro -->
-  <section class="slide">
-    <div class="card text-center">
-      <h1 class="fw-bold">Ace Cauilan</h1>
-      <p class="muted">Web Developer | Data Analyst</p>
-      <p>Philippines (Serving AU Clients)</p>
-      <p class="mt-3">PHP • MySQL • Bootstrap • SQL • BI • Looker Studio</p>
-      <p class="mt-4">📧 yourname@email.com</p>
-    </div>
-  </section>
-
-  <!-- Professional Summary -->
-  <section class="slide">
-    <div class="card">
-      <h2>Professional Summary</h2>
-      <p class="mt-3">Results-driven <strong>Web Developer and Business Data Analyst</strong> with experience delivering modern, scalable websites and data-driven solutions for business clients. Strong background in PHP, MySQL, Bootstrap, SQL, BI tools, and stakeholder collaboration. Experienced working with international teams and aligning solutions to business goals, KPIs, and timelines.</p>
-    </div>
-  </section>
-
-  <!-- Core Skills -->
-  <section class="slide">
-    <div class="card">
-      <h2>Core Skills</h2>
-      <h5 class="mt-4">Web Development</h5>
-      <ul>
-        <li>PHP, MySQL, HTML5, CSS3, JavaScript</li>
-        <li>Bootstrap 5 (responsive, mobile-first)</li>
-        <li>WordPress & Wix customization</li>
-        <li>Forms, authentication, admin dashboards</li>
-        <li>Performance optimization & security basics</li>
-      </ul>
-      <h5 class="mt-3">Data & Analytics</h5>
-      <ul>
-        <li>SQL (extraction, transformation, reporting)</li>
-        <li>Looker Studio / BI dashboards</li>
-        <li>KPI tracking & operational reports</li>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-light" href="#home">Mary Grace Cauilan</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="nav" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#summary">Summary</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
       </ul>
     </div>
-  </section>
+  </div>
+</nav>
 
-  <!-- Projects -->
-  <section class="slide">
-    <div class="card">
-      <h2>Selected Projects</h2>
-      <h5 class="mt-3">Borealis Travel and Tours</h5>
-      <p>PHP, MySQL, Bootstrap 5</p>
-      <ul>
-        <li>Travel booking website with filtering</li>
-        <li>Secure login and admin-managed content</li>
-        <li>Optimized UI for conversion</li>
-      </ul>
+<!-- HERO -->
+<section id="home" class="hero container">
+  <div class="w-100">
+    <h1>Mary Grace Cauilan</h1>
+    <p class="mt-3">Web Developer | Business Data Analyst</p>
+    <p class="mt-1">Philippines · Serving Virtual Clients</p>
+    <a href="#contact" class="btn-main mt-4">Work With Me</a>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section id="summary" class="container text-center mt-5">
+    
+  <h2 class="fw-bold mb-4">Professional Summary</h2>
+  <p class="muted">
+Results-driven Web Developer and Business Data Analyst with experience delivering modern, scalable websites and data-driven solutions for business clients. Strong background in PHP, MySQL, Bootstrap, SQL, BI tools, and stakeholder collaboration. Experienced working with international teams and aligning solutions to business goals, KPIs, and timelines.  </p>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="container text-center mt-5">
+  <h2 class="fw-bold mb-5">Core Skills</h2>
+  <div>
+    <span class="skill-badge">PHP</span>
+    <span class="skill-badge">MySQL</span>
+    <span class="skill-badge">HTML5</span>
+    <span class="skill-badge">CSS3</span>
+    <span class="skill-badge">JavaScript</span>
+    <span class="skill-badge">Bootstrap 5</span>
+    <span class="skill-badge">WordPress</span>
+    <span class="skill-badge">Wix</span>
+    <span class="skill-badge">SQL Reporting</span>
+    <span class="skill-badge">Looker Studio</span>
+    <span class="skill-badge">BI Tools</span>
+    <span class="skill-badge">VS Code</span>
+    <span class="skill-badge">Git/GitHub</span>
+    <span class="skill-badge">phpMyAdmin</span>
+    <span class="skill-badge">Canva</span>
+    <span class="skill-badge">Figma</span>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="container mt-5">
+  <h2 class="fw-bold text-center mb-5">Selected Projects</h2>
+  <div class="row g-4">
+
+    <!-- Borealis Travel and Tours -->
+    <div class="col-md-6">
+      <div class="card-ui">
+        <h5>Borealis Travel and Tours Website</h5>
+        <p class="muted">Full Website Development · PHP · MySQL · Bootstrap 5</p>
+        <p>Developed a CMS travel booking website with filters, secure login, and conversion-focused UI.</p>
+        <a href="http://www.borealistravelandtours.com/" target="_blank" class="btn btn-main mt-3">View Project</a>
+      </div>
     </div>
-  </section>
 
-  <section class="slide">
-    <div class="card">
-      <h5>Filflag Website</h5>
-      <p>PHP, HTML, CSS, Bootstrap</p>
-      <ul>
-        <li>Multi-page corporate & advocacy website</li>
-        <li>Embedded Facebook videos</li>
-        <li>Public-facing engagement focus</li>
-      </ul>
+    <!-- Filflag Website -->
+    <div class="col-md-6">
+      <div class="card-ui">
+        <h5>Filflag Website</h5>
+        <p class="muted">Corporate Advocacy Website · PHP · HTML · CSS · Bootstrap</p>
+        <p>Multi-page advocacy site with Facebook media integration and clear information flow.</p>
+        <a href="#" target="_blank" class="btn btn-main mt-3">View Project</a>
+      </div>
     </div>
-  </section>
 
-  <section class="slide">
-    <div class="card">
-      <h5>Innovit Website</h5>
-      <p>PHP, Bootstrap</p>
-      <ul>
-        <li>Professional services website</li>
-        <li>Clean, brand-aligned UI</li>
-        <li>Improved navigation and inquiries</li>
-      </ul>
+    <!-- Innovit Website -->
+    <div class="col-md-6">
+      <div class="card-ui">
+        <h5>Innovit Website</h5>
+        <p class="muted">Business Services Website · PHP · Bootstrap · HTML · CSS</p>
+        <p>Professional services layout, brand-aligned UI, improved navigation.</p>
+        <a href="https://www.innovitservices.tech/" target="_blank" class="btn btn-main mt-3">View Project</a>
+      </div>
     </div>
-  </section>
-
-  <!-- Systems & Analytics -->
-  <section class="slide">
-    <div class="card">
-      <h2>Systems & Analytics</h2>
-      <ul>
-        <li>Cash-to-Order Management System – digitized Excel tracking</li>
-        <li>People Allocation & Productivity Dashboard – BI & SQL</li>
-      </ul>
+    <!-- Cash-to-Order Management System -->
+    <div class="col-md-6">
+      <div class="card-ui">
+        <h5>Cash-to-Order Management System</h5>
+        <p class="muted">Internal Business System · PHP · MySQL · SQL</p>
+        <p>Digitized manual Excel-based order tracking, implemented PO & DR tracking, role-based access, and approval flow.</p>
+        <a href="#" target="_blank" class="btn btn-main mt-3">View Code</a>
+      </div>
     </div>
-  </section>
 
-  <!-- Why Work With Me -->
-  <section class="slide">
-    <div class="card">
-      <h2>Why Work With Me</h2>
-      <ul>
-        <li>Clear communication & documentation</li>
-        <li>Aligned with Australian business expectations</li>
-        <li>Strong mix of technical & business skills</li>
-        <li>Flexible with AU time zones</li>
-      </ul>
+    <!-- People Allocation & Productivity Dashboard -->
+    <div class="col-md-6">
+      <div class="card-ui">
+        <h5>People Allocation & Productivity Dashboard</h5>
+        <p class="muted">Analytics Dashboard · SQL · BI Tools</p>
+        <p>Built dashboards to track productivity and workforce allocation, translating raw data into management-ready insights.</p>
+       </div>
     </div>
-  </section>
 
-</div>
+    <div class="col-md-6">
+      <div class="card-ui">
+        <h5>Internal / Business Tool</h5>
+        <p class="muted">Analytics Dashboard · SQL · BI Tools</p>
+        <p>Built dashboards for business improvement and requests </p>
+       </div>
+    </div>
+  </div>
+</section>
 
-<div class="nav-btn">
-  <button class="btn btn-outline-light" onclick="prev()">◀</button>
-  <button class="btn btn-outline-light" onclick="next()">▶</button>
-</div>
 
-<script>
-  let index = 0;
-  const slider = document.getElementById('slider');
-  const total = slider.children.length;
+<!-- EXPERIENCE -->
+<section id="experience" class="container mt-5 text-center">
+  <h2 class="fw-bold mb-4">Experience Snapshot</h2>
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card-ui">
+        <h5>Business Data Analyst – Banking Industry</h5>
+        <ul class="muted text-start">
+          <li>Translate business needs into data insights</li>
+          <li>Build dashboards and reports for decision-making</li>
+          <li>Collaborate with stakeholders, IT, and leadership</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card-ui">
+        <h5>Web Developer (Freelance / Project-Based)</h5>
+        <ul class="muted text-start">
+          <li>Develop custom websites and systems for SMEs</li>
+          <li>Enhance existing sites with new features and improved UI</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-  function update() {
-    slider.style.transform = `translateX(-${index * 100}vw)`;
-  }
-  function next() {
-    if (index < total - 1) index++;
-    update();
-  }
-  function prev() {
-    if (index > 0) index--;
-    update();
-  }
-</script>
+<!-- CONTACT -->
+<section id="contact" class="container mt-5">
+  <h2 class="fw-bold text-center">Let’s Work Together</h2>
+  <p class="mt-3 text-center muted">
+    📧 zaicauilan@gmail.com <br>
+    Open for contract or project-based work <br>
+   </p>
 
+  <!-- Email Button -->
+  <div class="text-center mt-4">
+<a href="https://www.linkedin.com/in/mary-grace-cauilan-40477a187/" class="btn btn-main"> Send Message </a></section>
+
+
+<footer>
+  © <?php echo date('Y'); ?> Mary Grace Cauilan · Developer Portfolio
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
