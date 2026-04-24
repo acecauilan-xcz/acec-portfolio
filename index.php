@@ -225,7 +225,7 @@ Results-driven Web Developer and Business Data Analyst with experience deliverin
         <h5>Innovit Website</h5>
         <p class="muted">Business Services Website · PHP · Bootstrap · HTML · CSS</p>
         <p>Professional services layout, brand-aligned UI, improved navigation.</p>
-        <a href="https://www.innovitservices.tech/" target="_blank" class="btn btn-main mt-3">View Project</a>
+        <a href="https://innovitservicestech.godaddysites.com/" target="_blank" class="btn btn-main mt-3">View Project</a>
       </div>
     </div>
     <!-- Cash-to-Order Management System -->
